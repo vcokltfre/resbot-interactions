@@ -44,11 +44,11 @@ async def interactions(req: Request):
                     "content": "You must select a group to grant permissions for."
                 }
             }
-        content = f"Granted permission group {pgroup} on {server} to {mcname}"
+        content = f"Granted permission group {pgroup} on {server} to {mcname}."
     elif action == "op_revoke":
-        content = f"Revoked permission group {pgroup} on {server} from {mcname}"
+        content = f"Revoked permission group {pgroup} on {server} from {mcname}."
     else:
-        content = "Not implemented"
+        content = "Not implemented."
 
     return {
         "type": InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
