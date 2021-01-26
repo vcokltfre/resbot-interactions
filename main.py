@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
-from discord_interactions import verify_key, InteractionResponseType
+from discord_interactions import verify_key, InteractionResponseType, InteractionType
 
 from src.models import Interaction
 from config import PUBKEY
@@ -21,7 +21,7 @@ async def interactions(req: Request):
     if data["type"] == 1:
         return {"type":1}
 
-    if data["type"] == InteractionResponseType.APPLICATION_COMMAND:
+    if data["type"] == InteractionType.APPLICATION_COMMAND:
         return {
             "type": InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             "data": {
