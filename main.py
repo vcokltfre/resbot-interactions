@@ -37,6 +37,13 @@ async def interactions(req: Request):
     pgroup = ops[3]["value"] if len(ops) == 4 else None
 
     if action == "op_grant":
+        if not pgroup:
+            return {
+                "type": InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                "data": {
+                    "content": "You must select a group to grant permissions for."
+                }
+            }
         content = f"Granted permission group {pgroup} on {server} to {mcname}"
     elif action == "op_revoke":
         content = f"Revoked permission group {pgroup} on {server} from {mcname}"
