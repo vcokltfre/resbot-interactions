@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
-from discord_interactions import verify_key, InteractionResponseType,
+from discord_interactions import verify_key, InteractionResponseType
 
 from config import PUBKEY, roles
 
