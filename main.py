@@ -16,4 +16,4 @@ async def interactions(req: Request):
     if not verify_key(body, sig, ts, PUBKEY):
         raise HTTPException(400)
 
-    print(await req.json())
+    print(await req.json(), await req.body())
