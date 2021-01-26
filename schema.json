@@ -1,0 +1,58 @@
+{
+	"name": "mcperms",
+	"description": "Modify permissions for members on recreation servers.",
+	"options":[
+		{
+			"name": "type",
+			"description": "Grant or revoke permissions for members.",
+			"required": true,
+			"type": 3,
+			"choices": [
+				{
+					"name": "grant",
+					"value": "op_grant"
+				},
+				{
+					"name": "revoke",
+					"value": "op_revoke"
+				},
+				{
+					"name": "get",
+					"value": "op_get"
+				}
+			]
+		},
+		{
+			"name": "server",
+			"description": "Which server to modify user perms for.",
+			"required": true,
+			"type": 3
+		},
+		{
+			"name": "mcname",
+			"description": "Which minecraft username to modify perms for.",
+			"required": true,
+			"type": 3
+		},
+		{
+			"name": "group",
+			"description": "Which permission group to grant.",
+			"required": false,
+			"type": 3,
+			"choices": [
+				{
+					"name": "Builder",
+					"value": "group_builder"
+				},
+				{
+					"name": "Builder+",
+					"value": "group_builder_plus"
+				},
+				{
+					"name": "Private Project Access",
+					"value": "group_ppa"
+				}
+			]
+		}
+	]
+}
