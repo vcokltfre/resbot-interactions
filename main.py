@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
 from discord_interactions import verify_key
+from traceback import print_exc
 
 from config import PUBKEY
 from handlers.mcperms import MCPermsHandler
@@ -30,4 +31,5 @@ async def interactions(req: Request):
         try:
             return await handlers[name].call(data)
         except:
+            print_exc()
             return respond_default("An error occurred while processing the command.")
