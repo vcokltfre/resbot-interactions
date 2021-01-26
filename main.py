@@ -3,7 +3,7 @@ from fastapi.exceptions import HTTPException
 from discord_interactions import verify_key
 
 from src.models import Interaction
-from config import pubkey
+from config import PUBKEY
 
 app = FastAPI(docs_url=None)
 
@@ -13,7 +13,7 @@ async def interactions(req: Request):
     sig = req.headers["X-Signature-Ed25519"]
     ts = req.headers["X-Signature-Timestamp"]
 
-    if not verify_key(body, sig, ts, pubkey):
+    if not verify_key(body, sig, ts, PUBKEY):
         raise HTTPException(400)
 
     print(await req.json())
