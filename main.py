@@ -2,6 +2,8 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
 from discord_interactions import verify_key, InteractionResponseType, InteractionType
 
+from json import dumps
+
 from src.models import Interaction
 from config import PUBKEY
 
@@ -22,8 +24,9 @@ async def interactions(req: Request):
         return {"type":1}
 
     if data["type"] == InteractionType.APPLICATION_COMMAND:
+        print(dumps(data))
         return {
-            "type": InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            "type": InteractionResponseType.CHANNEL_MESSAGE,
             "data": {
                 "content": "Test success!"
             }
