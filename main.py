@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
-from discord_interactions import verify_key
+from discord_interactions import verify_key, InteractionResponseType
 
 from src.models import Interaction
 from config import PUBKEY
@@ -16,4 +16,15 @@ async def interactions(req: Request):
     if not verify_key(body, sig, ts, PUBKEY):
         raise HTTPException(400)
 
-    print(await req.json(), await req.body())
+    data = await req.json()
+
+    if data["type"] == 1:
+        return {"type":1}
+
+    if data["type"] == InteractionResponseType.APPLICATION_COMMAND:
+        return {
+            "type": InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            "data": {
+                "content": "Test success!"
+            }
+        }
