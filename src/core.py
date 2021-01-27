@@ -4,7 +4,10 @@ def respond_default(message: str) -> dict:
     return {
         "type": InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         "data": {
-            "content": message
+            "content": message,
+            "allowed_mentions":{
+                "users": False
+            }
         }
     }
 

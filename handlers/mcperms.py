@@ -15,7 +15,7 @@ class MCPermsHandler:
     @staticmethod
     def msg_grant(group: str, server: str, mcname: str, member: str):
         group = groups[group]
-        return f"Granted permission group `{group}` on server `{server}` to member `{member}` (MCName: {mcname})"
+        return f"Granted permission group `{group}` on server `{server}` to member <@{member}> (MCName: {mcname})"
 
     @staticmethod
     def msg_revoke(server: str, mcname: str):
