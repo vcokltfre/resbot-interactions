@@ -5,12 +5,17 @@ from traceback import format_exc
 
 from config import PUBKEY
 from handlers.mcperms import MCPermsHandler
+from handlers.report import ReportHandler
 from src.core import respond_ephemeral
+from src.http import HTTP
 
 app = FastAPI(docs_url=None)
 
+http = HTTP()
+
 handlers = {
-    "mcperms": MCPermsHandler()
+    "mcperms": MCPermsHandler(),
+    "report": ReportHandler(http)
 }
 
 @app.post("/interactions")
@@ -28,6 +33,7 @@ async def interactions(req: Request):
         return {"type":1}
 
     print(data)
+    await http.init()
 
     name = data["data"]["name"]
     if name in handlers:

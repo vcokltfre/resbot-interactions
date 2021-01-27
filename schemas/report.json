@@ -1,0 +1,18 @@
+{
+	"name": "report",
+	"description": "Report a message to staff.",
+	"options": [
+		{
+			"name": "link",
+			"description": "The message link to report.",
+			"required": true,
+			"type": 3
+		},
+		{
+			"name": "reason",
+			"description": "Why are you reporting this message?",
+			"required": true,
+			"type": 3
+		}
+	]
+}
