@@ -1,4 +1,4 @@
-from config import roles
+from config import mcperms_roles
 from src.core import respond_default, respond_ephemeral, getop, require
 
 groups = {
@@ -22,7 +22,7 @@ class MCPermsHandler:
         return f"Revoked permissions on server `{server}` from {mcname}"
 
     async def call(self, data: dict) -> dict:
-        rls = set(data["member"]["roles"]) & set(roles)
+        rls = set(data["member"]["roles"]) & set(mcperms_roles)
 
         if not rls:
             return respond_ephemeral("You do not have permission to use this command!")
