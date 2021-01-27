@@ -27,6 +27,8 @@ async def interactions(req: Request):
     if data["type"] == 1:
         return {"type":1}
 
+    print(data)
+
     name = data["data"]["name"]
     if name in handlers:
         try:
