@@ -10,7 +10,7 @@ class HTTP:
         self.sess = ClientSession(headers={'Authorization': f'Bot {TOKEN}'})
 
     async def init(self):
-        if self.sess.closed():
+        if self.sess.closed:
             self.sess = ClientSession(headers={'Authorization': f'Bot {TOKEN}'})
 
     async def send_message(self, channel: str, message: str):
