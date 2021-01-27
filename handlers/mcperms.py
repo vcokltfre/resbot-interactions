@@ -22,7 +22,7 @@ class MCPermsHandler:
         if action == "op_grant":
             if (not pgroup) or not member:
                 return respond_default("You must select a group and member to grant permissions for.")
-            content = f"Granted permission group {pgroup} on {server} to {mcname} ({member['user']['id']})."
+            content = f"Granted permission group {pgroup} on {server} to {mcname} ({member})."
         elif action == "op_revoke":
             content = f"Revoked permission group {pgroup} on {server} from {mcname}."
         else:
