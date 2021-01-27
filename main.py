@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
-from discord_interactions import verify_key
+from discord_interactions import verify_key, InteractionType, InteractionResponseType
 from traceback import format_exc
 from supress import supressed
 
@@ -33,8 +33,8 @@ async def interactions(req: Request):
 
     data = await req.json()
 
-    if data["type"] == 1:
-        return {"type":1}
+    if data["type"] == InteractionType.PING:
+        return {"type":InteractionResponseType.PONG}
 
     print(data)
     await http.init()
