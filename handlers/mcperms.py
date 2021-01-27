@@ -43,4 +43,4 @@ class MCPermsHandler:
         else:
             content = "Not implemented."
 
-        return respond_ephemeral(content)
+        return respond_default(content)

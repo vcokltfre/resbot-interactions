@@ -5,7 +5,7 @@ from traceback import format_exc
 
 from config import PUBKEY
 from handlers.mcperms import MCPermsHandler
-from src.core import respond_default
+from src.core import respond_ephemeral
 
 app = FastAPI(docs_url=None)
 
@@ -34,5 +34,5 @@ async def interactions(req: Request):
         try:
             return await handlers[name].call(data)
         except:
-            return respond_default(f"An error occurred while processing the command:\n```py\n{format_exc(1900)}```")
-    return respond_default("This command has not yet been implemented.")
+            return respond_ephemeral(f"An error occurred while processing the command:\n```py\n{format_exc(1900)}```")
+    return respond_ephemeral("This command has not yet been implemented.")
