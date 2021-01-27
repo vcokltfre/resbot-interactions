@@ -15,9 +15,12 @@ class HTTP:
         if self.sess.closed:
             self.sess = ClientSession(headers={'Authorization': f'Bot {TOKEN}'})
 
-    async def send_message(self, channel: str, message: str):
-        async with self.sess.post(BASE + f"/channels/{channel}/messages", json={"content":message, **AM}) as resp:
+    async def request(self, method, url, json = {}):
+        async with self.sess.request(method, BASE + url, json=json) as resp:
             return await resp.json()
+
+    async def send_message(self, channel: str, message: str):
+        return await self.request("POST", f"/channels/{channel}/messages", json={"content":message, **AM})
 
     async def report(self, message: str):
         return await self.send_message(CHANNEL, message)
