@@ -1,7 +1,7 @@
 {
 	"name": "mcperms",
 	"description": "Modify permissions for members on recreation servers.",
-	"options":[
+	"options": [
 		{
 			"name": "type",
 			"description": "Grant or revoke permissions for members.",
@@ -33,6 +33,12 @@
 			"description": "Which minecraft username to modify perms for.",
 			"required": true,
 			"type": 3
+		},
+		{
+			"name": "member",
+			"description": "The member the minecraft account belongs to.",
+			"required": false,
+			"type": 6
 		},
 		{
 			"name": "group",
