@@ -1,10 +1,25 @@
 from config import roles
 from src.core import respond_default, getop, require
 
+groups = {
+    "group_builder": "Builder",
+    "group_builder_plus": "Builder+",
+    "group_ppa": "Private Project Access"
+}
+
 
 class MCPermsHandler:
     def __init__(self):
         pass
+
+    @staticmethod
+    def msg_grant(group: str, server: str, mcname: str, member: str):
+        group = groups[group]
+        return f"Granted permission group `{group}` on server `{server}` to member `{member}` (MCName: {mcname})"
+
+    @staticmethod
+    def msg_revoke(server: str, mcname: str):
+        return f"Revoked permissions on server `{server}` from {mcname}"
 
     async def call(self, data: dict) -> dict:
         rls = set(data["member"]["roles"]) & set(roles)
@@ -22,9 +37,9 @@ class MCPermsHandler:
         if action == "op_grant":
             if not require(member, pgroup):
                 return respond_default("You must select a group and member to grant permissions for.")
-            content = f"Granted permission group {pgroup} on {server} to {mcname} ({member})."
+            content = self.msg_grant(group=pgroup, server=server, mcname=mcname, member=member)
         elif action == "op_revoke":
-            content = f"Revoked permission group {pgroup} on {server} from {mcname}."
+            content = self.msg_revoke(server=server, mcname=mcname)
         else:
             content = "Not implemented."
 
