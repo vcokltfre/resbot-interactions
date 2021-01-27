@@ -18,9 +18,9 @@ def respond_ephemeral(message: str) -> dict:
             "content": message,
             "allowed_mentions":{
                 "users": False
-            }
-        },
-        "flags": InteractionResponseFlags.EPHEMERAL
+            },
+            "flags": InteractionResponseFlags.EPHEMERAL
+        }
     }
 
 def getop(name: str, ops: list):
