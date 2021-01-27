@@ -24,4 +24,4 @@ class ReportHandler:
 
         print(await self.http.report(msg))
 
-        return respond_ephemeral("Your message has been reported to the staff team!")
+        return respond_ephemeral("The message has been reported to the staff team!")

@@ -4,6 +4,8 @@ from bot_secrets.config import TOKEN, CHANNEL
 
 BASE = "https://discord.com/api/v8"
 
+AM = {"allowed_mentions":{"users":False}}
+
 
 class HTTP:
     def __init__(self):
@@ -14,7 +16,7 @@ class HTTP:
             self.sess = ClientSession(headers={'Authorization': f'Bot {TOKEN}'})
 
     async def send_message(self, channel: str, message: str):
-        async with self.sess.post(BASE + f"/channels/{channel}/messages", json={"content":message}) as resp:
+        async with self.sess.post(BASE + f"/channels/{channel}/messages", json={"content":message, **AM}) as resp:
             return await resp.json()
 
     async def report(self, message: str):
