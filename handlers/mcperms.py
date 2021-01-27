@@ -13,12 +13,12 @@ class MCPermsHandler:
         pass
 
     @staticmethod
-    def msg_grant(group: str, server: str, mcname: str, member: str):
+    def msg_grant(group: str, server: str, mcname: str, member: str) -> str:
         group = groups[group]
         return f"Granted permission group `{group}` on server `{server}` to member <@{member}> (MCName: {mcname})"
 
     @staticmethod
-    def msg_revoke(server: str, mcname: str):
+    def msg_revoke(server: str, mcname: str) -> str:
         return f"Revoked permissions on server `{server}` from {mcname}"
 
     async def call(self, data: dict) -> dict:
