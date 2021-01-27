@@ -27,8 +27,10 @@ async def interactions(req: Request):
     if data["type"] == 1:
         return {"type":1}
 
-    if name := data["data"]["name"] in handlers:
+    name = data["data"]["name"]
+    if name in handlers:
         try:
             return await handlers[name].call(data)
         except:
             return respond_default(f"An error occurred while processing the command:\n```py\n{format_exc(1900)}```")
+    return respond_default("This command has not yet been implemented.")
