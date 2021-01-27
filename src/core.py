@@ -13,3 +13,9 @@ def getop(name: str, ops: list):
         if op["name"] == name:
             return op["value"]
     return None
+
+def require(*things):
+    for thing in things:
+        if not thing:
+            return False
+    return True

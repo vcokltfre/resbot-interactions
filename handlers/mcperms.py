@@ -1,5 +1,5 @@
 from config import roles
-from src.core import respond_default, getop
+from src.core import respond_default, getop, require
 
 
 class MCPermsHandler:
@@ -20,7 +20,7 @@ class MCPermsHandler:
         pgroup = getop("group", ops)
 
         if action == "op_grant":
-            if (not pgroup) or not member:
+            if not require(member, pgroup):
                 return respond_default("You must select a group and member to grant permissions for.")
             content = f"Granted permission group {pgroup} on {server} to {mcname} ({member})."
         elif action == "op_revoke":
