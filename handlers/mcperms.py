@@ -1,5 +1,5 @@
 from config import roles
-from src.core import respond_default, getop, require
+from src.core import respond_default, respond_ephemeral, getop, require
 
 groups = {
     "group_builder": "Builder",
@@ -25,7 +25,7 @@ class MCPermsHandler:
         rls = set(data["member"]["roles"]) & set(roles)
 
         if not rls:
-            return respond_default("You do not have permissions to use this command!")
+            return respond_ephemeral("You do not have permissions to use this command!")
 
         ops = data["data"]["options"]
         action = getop("type", ops)
