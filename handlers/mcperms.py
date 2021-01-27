@@ -25,7 +25,7 @@ class MCPermsHandler:
         rls = set(data["member"]["roles"]) & set(roles)
 
         if not rls:
-            return respond_ephemeral("You do not have permissions to use this command!")
+            return respond_ephemeral("You do not have permission to use this command!")
 
         ops = data["data"]["options"]
         action = getop("type", ops)
@@ -36,11 +36,11 @@ class MCPermsHandler:
 
         if action == "op_grant":
             if not require(member, pgroup):
-                return respond_default("You must select a group and member to grant permissions for.")
+                return respond_ephemeral("You must select a group and member to grant permissions for.")
             content = self.msg_grant(group=pgroup, server=server, mcname=mcname, member=member)
         elif action == "op_revoke":
             content = self.msg_revoke(server=server, mcname=mcname)
         else:
             content = "Not implemented."
 
-        return respond_default(content)
+        return respond_ephemeral(content)
