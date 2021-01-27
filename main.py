@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
 from discord_interactions import verify_key
 from traceback import format_exc
+from supress import supressed
 
 from config import PUBKEY
 from handlers.mcperms import MCPermsHandler
@@ -24,7 +25,10 @@ async def interactions(req: Request):
     sig = req.headers["X-Signature-Ed25519"]
     ts = req.headers["X-Signature-Timestamp"]
 
-    if not verify_key(body, sig, ts, PUBKEY):
+    with supressed():
+        verified = verify_key(body, sig, ts, PUBKEY)
+
+    if not verified:
         raise HTTPException(400)
 
     data = await req.json()
