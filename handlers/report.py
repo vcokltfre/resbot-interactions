@@ -21,7 +21,7 @@ class ReportHandler:
             return respond_ephemeral("That is not a valid Discord message link!")
 
         id = data["member"]["user"]["id"]
-        msg = f"User <@{id}> (id) reported message <{ml}> for:\n```\n{reason[:1500]}\n```"
+        msg = f"User <@{id}> ({id}) reported message <{ml}> for:\n```\n{reason[:1500]}\n```"
 
         print(await self.http.report(msg))
 
