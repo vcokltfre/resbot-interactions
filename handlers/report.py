@@ -2,7 +2,7 @@ from re import compile
 
 from src.core import respond_ephemeral, getop
 
-link = compile(r"https://(canary\.|ptb\.)?discord\.com/channels/\d{17,20}/\d{17,20}/\d{17,20}/?$")
+link = compile(r"https://(canary\.|ptb\.)?discord\.com/channels/\d{17,20}/\d{17,20}/\d{17,20}/?")
 
 
 class ReportHandler:
@@ -14,8 +14,9 @@ class ReportHandler:
         ml = getop("link", ops)
         reason = getop("reason", ops)
 
-        if ml := link.search(ml).group():
-            pass
+        ml = link.search(ml)
+        if ml:
+            ml = ml.group()
         else:
             return respond_ephemeral("That is not a valid Discord message link!")
 
