@@ -15,7 +15,7 @@ app = FastAPI(docs_url=None)
 http = HTTP()
 
 handlers = {
-    "mcperms": MCPermsHandler(),
+    "mcperms": MCPermsHandler(http),
     "report": ReportHandler(http)
 }
 

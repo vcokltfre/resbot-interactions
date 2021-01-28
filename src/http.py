@@ -1,8 +1,9 @@
 from aiohttp import ClientSession
 
-from bot_secrets.config import TOKEN, CHANNEL
+from bot_secrets.config import TOKEN, CHANNEL, MC_TOKEN
 
 BASE = "https://discord.com/api/v8"
+MCPBASE = "https://mcperms.mcatho.me/mcserver"
 
 AM = {"allowed_mentions":{"users":False}}
 
@@ -24,3 +25,9 @@ class HTTP:
 
     async def report(self, message: str):
         return await self.send_message(CHANNEL, message)
+
+    async def get_user(self, server: str, userid: str):
+        async with self.sess.get(MCPBASE + f"/{server}/{userid}") as resp:
+            if resp.status > 299:
+                return False
+            return await resp.json()

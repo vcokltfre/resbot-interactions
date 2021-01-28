@@ -9,8 +9,8 @@ groups = {
 
 
 class MCPermsHandler:
-    def __init__(self):
-        pass
+    def __init__(self, http):
+        self.http = http
 
     @staticmethod
     def msg_grant(group: str, server: str, mcname: str, member: str) -> str:
@@ -41,6 +41,7 @@ class MCPermsHandler:
         elif action == "op_revoke":
             content = self.msg_revoke(server=server, mcname=mcname)
         else:
-            content = "Not implemented."
+            data = await self.http.get_user(server, mcname)
+            content = str(data)
 
         return respond_default(content)

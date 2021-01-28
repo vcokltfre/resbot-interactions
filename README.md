@@ -6,4 +6,5 @@ bot_secrets/config.py:
 ```py
 TOKEN = ""
 CHANNEL = ""
+MC_TOKEN = ""
 ```
