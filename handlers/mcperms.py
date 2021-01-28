@@ -43,7 +43,7 @@ class MCPermsHandler:
             content = self.msg_grant(group=pgroup, server=server, mcname=mcname, member=member)
         elif action == "op_revoke":
             c = await self.http.revoke_perms(server, member)
-            content = self.msg_revoke(server=server, mcname=mcname)
+            content = self.msg_revoke(server=server, userid=mcname)
         else:
             c = await self.http.get_user(server, mcname)
             content = f"```json\n{dumps(c, indent=2)}```" if c else c
