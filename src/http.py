@@ -27,7 +27,7 @@ class HTTP:
         return await self.send_message(CHANNEL, message)
 
     async def get_user(self, server: str, userid: str):
-        async with self.sess.get(MCPBASE + f"/{server}/{userid}") as resp:
+        async with self.sess.get(MCPBASE + f"/{server}/{userid}", headers={"auth":MC_TOKEN}) as resp:
             if resp.status > 299:
                 return False
             return await resp.json()
