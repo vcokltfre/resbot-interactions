@@ -1,3 +1,5 @@
+from json import dumps
+
 from config import mcperms_roles
 from src.core import respond_default, respond_ephemeral, getop, require
 
@@ -37,11 +39,15 @@ class MCPermsHandler:
         if action == "op_grant":
             if not require(member, pgroup):
                 return respond_ephemeral("You must select a group and member to grant permissions for.")
+            c = await self.http.grant_perms(server, pgroup, member, mcname)
             content = self.msg_grant(group=pgroup, server=server, mcname=mcname, member=member)
         elif action == "op_revoke":
+            c = await self.http.revoke_perms(server, member)
             content = self.msg_revoke(server=server, mcname=mcname)
         else:
-            data = await self.http.get_user(server, mcname)
-            content = str(data)
+            c = await self.http.get_user(server, mcname)
+            content = f"```json\n{dumps(c, indent=2)}```" if c else c
 
-        return respond_default(content)
+        if c:
+            return respond_default(content)
+        return respond_default("Uh oh! Something went wrong while handling your request!")

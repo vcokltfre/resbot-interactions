@@ -31,3 +31,15 @@ class HTTP:
             if resp.status > 299:
                 return False
             return await resp.json()
+
+    async def grant_perms(self, server: str, group: str, userid: str, mcname: str):
+        async with self.sess.post(MCPBASE + f"/{server}/{group}/{userid}/{mcname}", headers={"auth":MC_TOKEN}) as resp:
+            if resp.status > 299:
+                return False
+            return await resp.json()
+
+    async def revoke_perms(self, server: str, userid: str,):
+        async with self.sess.delete(MCPBASE + f"/{server}/{userid}", headers={"auth":MC_TOKEN}) as resp:
+            if resp.status > 299:
+                return False
+            return await resp.json()
